@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<!--
+Original text by Daniël de Kok and Harm Brouwer.
+
+Reproduced by Hamish Dickson
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Introduction to Natural Language Processing</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">intro to nlp</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="col-md-6" id="about">
+        <h2>0. About</h2>
+        <p>Hi and welcome to Introduction to Natural Language Processing!</p>
+
+        <p>I am, right now learning nlp. That means I can't promise that everything in here is:</p>
+
+        <ul>
+            <li>correct (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">if so, let me know</a>)</li>
+            <li>up to date (<a href="https://github.com/hamishdickson/nlp-book/pulls" target="_blank">send me a pull request</a>)</li>
+            <li>good practice (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">let me know</a>)</li>
+            <li>lots of other things (you get the idea)</li>
+        </ul>
+
+        <p>but hey, this book is on github, so hopefully someone will hit me up with the right thing!</p>
+
+        <p>I have taken a book written by Daniël de Kok and Harm Brouwer and adapted it as
+        I've gone along. My main adaptions are to simply add more detail, more examples and a nice skin (circa 2015),
+            but the core of this book can be found in their work <a href="http://nlpwp.org/book/index.xhtml" target="_blank">http://nlpwp.org/book/index.xhtml</a></p>
+
+        <p>This whole book can be found <a href="https://github.com/hamishdickson/nlp-book" target="_blank">on my github page</a>.</p>
+    </div>
+
+    <div class="col-md-6" id="contact">
+        <h2>0.1 Contact</h2>
+        <p>With all that in mind, feel free to contact me if you have any questions/comments (/thanks??) - <a href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a></p>
+    </div>
+
+    <hr class="col-md-12">
+
+    <div class="col-md-6">
+        <h2>1. Introduction</h2>
+
+        <h3>1.1 Welcome</h3>
+
+        <p>The Internet and the World Wide Web have changed mankind, forever. It is to early too tell, but their impact
+            may
+            be as great as the combustion engine or the introduction of electric devices. The Internet gave universal
+            access
+            to information, not just information that broadcasters or newspapers thought that was important, but
+            information
+            that interests the 'websurfer'. However the Internet is not a one-way street, every Internet user is also a
+            producer: people make websites, maintain blogs, post tweets, and socialize via social networks.</p>
+
+        <p>Since a substantial part of the world has Internet access, and every user is also a producer, there is an
+            enormous amount of information available. Some of it is of peer-reviewed and of a high quality, most of it
+            is
+            unchecked and biased. Still, every single piece of information can contain valuable information. For
+            instance,
+            as a vacuum cleaner producer, you might think that social media are not so interesting. However, the
+            contrary is
+            true: between billions of messages there may be hundreds expressing sentiment about your product. Such
+            messages
+            can answer questions about how your brand is conceived, what problems people commonly have with your
+            product,
+            etc.</p>
+
+        <p>Obviously, it is out of anyone's reach to manually analyze a significant portion of the information that is
+            available on the Internet. The amount is just too overwhelming. Classic data analysis tools may not suffice
+            either, most of the information is seemingly unstructured, and consist of blobs of natural language
+            sentences.
+            However, language is also structure. It is just not the kind of structure that computers can normally deal
+            with.
+            Computers deal with neat XML files, fragments of JSON, or comma separated values. No, it is the structure
+            that
+            we humans use to convey and transfer meaning. This book is about that type of information. We will go into
+            many
+            of the techniques that so-called computational linguists use to analyze the structure of human language, and
+            transform it into a form that computers work with.</p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>1.2 What is natural language processing?</h2>
+
+        <p>Well, right from wikipedia: "Natural language processing (NLP) is a field of computer science, artificial
+            intelligence, and computational linguistics concerned with the interactions between computers and human
+            (natural) languages. As such, NLP is related to the area of human–computer interaction. Many challenges in
+            NLP involve natural language understanding, that is, enabling computers to derive meaning from human or
+            natural language input, and others involve natural language generation."</p>
+    </div>
+
+    <div class="col-md-6">
+        <h2>1.2 What is natural language processing?</h2>
+
+        <p>Haskell is a static, pure, lazy, functional language. Gee, that sounds an awful lot like buzzword lingo! That
+            may well be, but these properties make Haskell a very effective language, and sometimes a bit odd. These
+            properties are also opposite to most mainstream languages. For instance, Java is static, impure, eager, and
+            not functional, Ruby is dynamic, impure, eager, and only functional at times. While it is hard to give an
+            accurate definition of every characteristic, we will try anyway.
+        </p>
+
+        <p>
+            Functional: Haskell puts an emphasis on functions and treats computation as the evaluation of functions.
+            This in contrast to so-called imperative languages, that specify an order of instructions. As such, Haskell
+            functions very often resemble mathematical functions closely. Being functional also has practical
+            implications. For instance, iteration is accomplished by means of recursion, and functions are also values
+            and can be passed to other functions.
+        </p>
+
+        <p>
+            Pure: Haskell is a pure language, in that functions do not have side-effects. This means that existing
+            values cannot be changed, since changing data would be a side-effect of a function. It also guarantees that
+            the evaluation of a function will always result in the same value given the same function arguments.
+        </p>
+
+        <p>
+            Lazy: As a lazy language, Haskell only evaluates expressions when needed. Say you just implemented a
+            function that gives a list of all prime numbers. In a strict language, the function that makes the list will
+            never terminate (since there are always more prime numbers). Haskell, on the contrary, will only evaluate
+            this function when and as much as necessary. As long as you take a finite number of primes from the list,
+            the program will happily terminate.
+        </p>
+
+        <p>
+            Static: Haskell programs are compiled before they can run. This means that the Haskell compiler will catch
+            many errors for you at compile-time, rather than finding them when your program is used in production.
+            Additionally, Haskell does type-inference. This means that the Haskell compiler can find out the types of
+            values most of the times, and you do not need to type-annotate every value.
+        </p>
+
+        <p>
+            If you have prior programming experience in an imperative or eager language, Haskell can feel a bit odd in
+            the beginning. Don't worry, you will feel warm and fuzzy eventually!
+        </p>
+
+        <p>
+            You may ask why we chose Haskell as the main programming language for this book, rather than a more
+            mainstream language. During our own experiences developing natural language processing tools, we noticed
+            that very many natural language processing tasks are relatively straightforward data transformations.
+            Haskell is a language that is exceptionally good at data transformations. First of all, because it has
+            higher order functions (functions that take functions as an argument) that traverse lists, sets, mappings,
+            etc. Second, Haskell makes it easy to construct more complex transformations out of simple transformations.
+        </p>
+
+        <p>
+            Although this book does not provide a full introduction to the Haskell programming language, we try to cover
+            Haskell concepts extensively when required. If you require more background on certain concepts, we recommend
+            you to consult the book Learn Haskell for Great Good!</p>
+    </div>
+
+
+</div>
+
+<div class="container footer">
+    <p>Hamish Dickson 2015 - <a href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a> - <a href="https://github.com/hamishdickson" target="_blank">https://github.com/hamishdickson</a></p>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+</html>
