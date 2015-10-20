@@ -2,7 +2,7 @@
 <!--
 Original text by Daniël de Kok and Harm Brouwer.
 
-Reproduced by Hamish Dickson
+Reproduced by Hamish Dickson 2015, https://github.com/hamishdickson/nlp-book
 -->
 <html lang="en">
 <head>
@@ -55,29 +55,42 @@ Reproduced by Hamish Dickson
 
     <div class="col-md-6" id="about">
         <h2>0. About</h2>
+
         <p>Hi and welcome to Introduction to Natural Language Processing!</p>
 
         <p>I am, right now learning nlp. That means I can't promise that everything in here is:</p>
 
         <ul>
-            <li>correct (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">if so, let me know</a>)</li>
-            <li>up to date (<a href="https://github.com/hamishdickson/nlp-book/pulls" target="_blank">send me a pull request</a>)</li>
-            <li>good practice (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">let me know</a>)</li>
+            <li>correct (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">if so, let me
+                know</a>)
+            </li>
+            <li>up to date (<a href="https://github.com/hamishdickson/nlp-book/pulls" target="_blank">send me a pull
+                request</a>)
+            </li>
+            <li>good practice (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">let me
+                know</a>)
+            </li>
             <li>lots of other things (you get the idea)</li>
         </ul>
 
         <p>but hey, this book is on github, so hopefully someone will hit me up with the right thing!</p>
 
         <p>I have taken a book written by Daniël de Kok and Harm Brouwer and adapted it as
-        I've gone along. My main adaptions are to simply add more detail, more examples and a nice skin (circa 2015),
-            but the core of this book can be found in their work <a href="http://nlpwp.org/book/index.xhtml" target="_blank">http://nlpwp.org/book/index.xhtml</a></p>
+            I've gone along. My main adaptions are to simply add more detail, more examples and a nice skin (circa
+            2015),
+            but the core of this book can be found in their work <a href="http://nlpwp.org/book/index.xhtml"
+                                                                    target="_blank">http://nlpwp.org/book/index.xhtml</a>
+        </p>
 
-        <p>This whole book can be found <a href="https://github.com/hamishdickson/nlp-book" target="_blank">on my github page</a>.</p>
+        <p>This whole book can be found <a href="https://github.com/hamishdickson/nlp-book" target="_blank">on my github
+            page</a>.</p>
     </div>
 
     <div class="col-md-6" id="contact">
         <h2>0.1 Contact</h2>
-        <p>With all that in mind, feel free to contact me if you have any questions/comments (/thanks??) - <a href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a></p>
+
+        <p>With all that in mind, feel free to contact me if you have any questions/comments (/thanks??) - <a
+                href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a></p>
     </div>
 
     <hr class="col-md-12">
@@ -189,14 +202,63 @@ Reproduced by Hamish Dickson
         <p>
             Although this book does not provide a full introduction to the Haskell programming language, we try to cover
             Haskell concepts extensively when required. If you require more background on certain concepts, we recommend
-            you to consult the book Learn Haskell for Great Good!</p>
+            you to consult the free book <a href="http://learnyouahaskell.com/">Learn Haskell for Great Good!</a></p>
     </div>
 
+    <hr class="col-md-12">
+
+    <div class="col-md-6">
+        <h2>2. Haskell</h2>
+
+        <p>To work with this book, you need the Haskell Platform and a text editor. The Haskell Platform is available
+            for Mac OS X, Windows, and Linux at: http://hackage.haskell.org/platform/ Download the package for your
+            platform, and install it.
+        </p>
+
+        <p>
+            If you do not use one of these platforms, not all is lost. First of all, you should download the ghc Haskell
+            compiler. If you operating system provides a ports system or package manager, use it to locate and install a
+            ghc package. If your operating system does not provide a port or package for ghc, you can still try to
+            download a binary distribution from the GHC website. Once you have installed and set up ghc, install the
+            packages of the Haskell Platform.
+        </p>
+
+        <p>
+            For the text editor, pick any editor you find comfortable, as long as it saves files as plain text.
+            Programming Haskell becomes more comfortable if you have an editor with syntax highlighting and interpreter
+            integration. Your authors prefer the Emacs editor with haskell-mode. haskell-mode provides good support for
+            highlighting, and Haskell code formatting. Besides that, Emacs allows you to run the ghci Haskell
+            interpreter within the editor.
+        </p>
+
+        <p>
+            Some examples in the book use corpora. These corpora are available at: http://nlpwp.org/
+        </p>
+    </div>
+
+    <hr class="col-md-12">
+    <div class="col-md-6">
+        <h2>2.1 Getting started! (in Haskell)</h2>
+
+        <p>You will probably want to get acquainted with the ghci Haskell interpreter. It allows you to try Haskell
+            expressions and get immediate feedback. On UNIX systems, type ghci -XNoMonomorphismRestriction in a terminal
+            to launch the interpreter. You will be greeted with a prompt that resembles the following:</p>
+
+        <script src="https://gist.github.com/hamishdickson/e357d715f911d6da3da6.js"></script>
+
+        <p>On Windows, choose Start -> All Programs -> Haskell Platform -> WinGHCi. The first time, you should set the
+            NoMonomorphismRestriction option that is required for some examples. Do this by going to the following item:
+            File > Options > GHCi Startup. Then append -XNoMonomorphismRestriction in the field (make sure that there is
+            a space before this addition). Click OK, and restart WinGHCi.</p>
+    </div>
+
+    <hr class="col-md-12">
 
 </div>
 
 <div class="container footer">
-    <p>Hamish Dickson 2015 - <a href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a> - <a href="https://github.com/hamishdickson" target="_blank">https://github.com/hamishdickson</a></p>
+    <p>Hamish Dickson 2015 - <a href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a> - <a
+            href="https://github.com/hamishdickson" target="_blank">https://github.com/hamishdickson</a></p>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
