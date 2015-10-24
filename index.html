@@ -53,247 +53,310 @@ Reproduced by Hamish Dickson 2015, https://github.com/hamishdickson/nlp-book
 
 <div class="container">
 
-    <div class="col-md-6" id="about">
-        <h2>0. About</h2>
-
-        <p>Hi and welcome to Introduction to Natural Language Processing!</p>
-
-        <p>Over the course of this book, my aim is to introduce nlp to you. It has been written while learning nlp
-            myself and has started out as an expansion to the online book <a href="http://nlpwp.org/book/index.xhtml"
-                                                             target="_blank">Natural Language Processing for the Working Programmer</a> (nlpwp).
-
-            Nlpwp is good, but is incomplete and a bit out of date (it was written in 2010) - my aim is to provide
-            something up to date and largely self-contained.</p>
-
-        <p>This book is a work in progress, meaning right now you may find material that is:</p>
-
+    <div class="col-md-2" id="side-nav">
         <ul>
-            <li>wrong (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">if so, let me
-                know</a>)
-            </li>
-            <li>out of date (<a href="https://github.com/hamishdickson/nlp-book/pulls" target="_blank">send me a pull
-                request</a>)
-            </li>
-            <li>considered bad practice (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">let me
-                know</a>)
-            </li>
-            <li>lots of other things (you get the idea)</li>
+            <li><a href="#about">about</a></li>
+            <li><a href="#contact">contact</a></li>
+            <li><a href="#intro">introduction</a></li>
         </ul>
-
-        <p>but hey, this book is on github, so hopefully someone will hit me up with the right thing!</p>
-
-        <h3>0.1 Thanks</h3>
-        <p>Like have just said, this is an expansion of the book written by Daniël de Kok and Harm Brouwer.
-            My main adaptions are to simply add more detail, more examples and a nice skin (circa
-            2015),
-            but the core of this book can be found in their work <a href="http://nlpwp.org/book/index.xhtml"
-                                                                    target="_blank">http://nlpwp.org/book/index.xhtml</a>.
-            I will take no offence if you go right to their book and ignore my update.
-        </p>
-
-        <p>The whole of this book can be found <a href="https://github.com/hamishdickson/nlp-book" target="_blank">on my github
-            page</a> and has been written under the MIT licence, which basically means you can do with it what you will.</p>
     </div>
 
-    <div class="col-md-6" id="contact">
-        <h2>0.2 Contact</h2>
+    <div class="col-md-8">
 
-        <p>With all that in mind, feel free to contact me if you have any questions/comments (/thanks??) - <a
-                href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a></p>
+        <div id="about">
+            <h2>0. About</h2>
+
+            <p>Hi and welcome to Introduction to Natural Language Processing!</p>
+
+            <p>Over the course of this book, my aim is to introduce nlp to you. It has been written while learning nlp
+                myself and has started out as an expansion to the online book <a
+                        href="http://nlpwp.org/book/index.xhtml"
+                        target="_blank">Natural Language Processing for the Working Programmer</a> (nlpwp).
+
+                Nlpwp is good, but is incomplete and a bit out of date (it was written in 2010) - my aim is to provide
+                something up to date and largely self-contained.</p>
+
+            <p>This book is a work in progress, meaning right now you may find material that is:</p>
+
+            <ul>
+                <li>wrong (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">if so, let me
+                    know</a>)
+                </li>
+                <li>out of date (<a href="https://github.com/hamishdickson/nlp-book/pulls" target="_blank">send me a
+                    pull
+                    request</a>)
+                </li>
+                <li>considered bad practice (<a href="https://github.com/hamishdickson/nlp-book/issues" target="_blank">let
+                    me
+                    know</a>)
+                </li>
+                <li>lots of other things (you get the idea)</li>
+            </ul>
+
+            <p>but hey, this book is on github, so hopefully someone will hit me up with the right thing!</p>
+
+            <h3>0.1 Thanks</h3>
+
+            <p>Like have just said, this is an expansion of the book written by Daniël de Kok and Harm Brouwer.
+                My main adaptions are to simply add more detail, more examples and a nice skin (circa
+                2015),
+                but the core of this book can be found in their work <a href="http://nlpwp.org/book/index.xhtml"
+                                                                        target="_blank">http://nlpwp.org/book/index.xhtml</a>.
+                I will take no offence if you go right to their book and ignore my update.
+            </p>
+
+            <p>The whole of this book can be found <a href="https://github.com/hamishdickson/nlp-book" target="_blank">on
+                my github
+                page</a> and has been written under the MIT licence, which basically means you can do with it what you
+                will.</p>
+        </div>
+
+        <div id="contact">
+            <h2>0.2 Contact</h2>
+
+            <p>With all that in mind, feel free to contact me if you have any questions/comments (/thanks??) - <a
+                    href="mailto:https://github.com/hamishdickson">hamish.dickson@gmail.com</a></p>
+        </div>
+
+
+        <hr class="col-md-12">
+
+        <div id="intro">
+            <h2>1. Introduction</h2>
+
+            <h3>1.1 Welcome</h3>
+
+            <p>The Internet and the World Wide Web have changed mankind, forever. It is to early too tell, but their
+                impact
+                may
+                be as great as the combustion engine or the introduction of electric devices. The Internet gave
+                universal
+                access
+                to information, not just information that broadcasters or newspapers thought that was important, but
+                information
+                that interests the 'websurfer'. However the Internet is not a one-way street, every Internet user is
+                also a
+                producer: people make websites, maintain blogs, post tweets, and socialize via social networks.</p>
+
+            <p>Since a substantial part of the world has Internet access, and every user is also a producer, there is an
+                enormous amount of information available. Some of it is of peer-reviewed and of a high quality, most of
+                it
+                is
+                unchecked and biased. Still, every single piece of information can contain valuable information. For
+                instance,
+                as a vacuum cleaner producer, you might think that social media are not so interesting. However, the
+                contrary is
+                true: between billions of messages there may be hundreds expressing sentiment about your product. Such
+                messages
+                can answer questions about how your brand is conceived, what problems people commonly have with your
+                product,
+                etc.</p>
+
+            <p>Obviously, it is out of anyone's reach to manually analyze a significant portion of the information that
+                is
+                available on the Internet. The amount is just too overwhelming. Classic data analysis tools may not
+                suffice
+                either, most of the information is seemingly unstructured, and consist of blobs of natural language
+                sentences.
+                However, language is also structure. It is just not the kind of structure that computers can normally
+                deal
+                with.
+                Computers deal with neat XML files, fragments of JSON, or comma separated values. No, it is the
+                structure
+                that
+                we humans use to convey and transfer meaning. This book is about that type of information. We will go
+                into
+                many
+                of the techniques that so-called computational linguists use to analyze the structure of human language,
+                and
+                transform it into a form that computers work with.</p>
+        </div>
+
+        <div>
+            <h3>1.2 Who is this book for?</h3>
+
+            <p>Anyone who has a few years programming with a language like C++, java, python, php, ruby - something
+                rich,
+                but not purely functional. While this book isn't about Haskell or Functional Programming, we will go
+                through
+                the concepts as required and it will hopefully be pretty much self contained.</p>
+        </div>
+
+        <div>
+            <h3>1.3 Help! I'm stuck!</h3>
+
+            <p>If you're stuck on any of the material in this book, then Google really is your friend - if that doesn't
+                work
+                then please get in touch - I'm easy enough to contact and if I can help I will (then probably update the
+                book
+                to help others!)</p>
+        </div>
+
+        <div>
+            <h3>1.2 What is natural language processing?</h3>
+
+            <p>Well, right from wikipedia: "Natural language processing (NLP) is a field of computer science, artificial
+                intelligence, and computational linguistics concerned with the interactions between computers and human
+                (natural) languages. As such, NLP is related to the area of human–computer interaction. Many challenges
+                in
+                NLP involve natural language understanding, that is, enabling computers to derive meaning from human or
+                natural language input, and others involve natural language generation."</p>
+        </div>
+
+        <hr class="col-md-12">
+
+        <div>
+            <h2>2. Haskell</h2>
+
+            <h3>2.1 What's a Haskell?</h3>
+
+            <p>Haskell is a static, pure, lazy, functional language. Gee, that sounds an awful lot like buzzword lingo!
+                That
+                may well be, but these properties make Haskell a very effective language, and sometimes a bit odd. These
+                properties are also opposite to most mainstream languages. For instance, Java is static, impure, eager,
+                and
+                not functional, Ruby is dynamic, impure, eager, and only functional at times. While it is hard to give
+                an
+                accurate definition of every characteristic, we will try anyway.
+            </p>
+
+            <p>
+                Functional: Haskell puts an emphasis on functions and treats computation as the evaluation of functions.
+                This in contrast to so-called imperative languages, that specify an order of instructions. As such,
+                Haskell
+                functions very often resemble mathematical functions closely. Being functional also has practical
+                implications. For instance, iteration is accomplished by means of recursion, and functions are also
+                values
+                and can be passed to other functions.
+            </p>
+
+            <p>
+                Pure: Haskell is a pure language, in that functions do not have side-effects. This means that existing
+                values cannot be changed, since changing data would be a side-effect of a function. It also guarantees
+                that
+                the evaluation of a function will always result in the same value given the same function arguments.
+            </p>
+
+            <p>
+                Lazy: As a lazy language, Haskell only evaluates expressions when needed. Say you just implemented a
+                function that gives a list of all prime numbers. In a strict language, the function that makes the list
+                will
+                never terminate (since there are always more prime numbers). Haskell, on the contrary, will only
+                evaluate
+                this function when and as much as necessary. As long as you take a finite number of primes from the
+                list,
+                the program will happily terminate.
+            </p>
+
+            <p>
+                Static: Haskell programs are compiled before they can run. This means that the Haskell compiler will
+                catch
+                many errors for you at compile-time, rather than finding them when your program is used in production.
+                Additionally, Haskell does type-inference. This means that the Haskell compiler can find out the types
+                of
+                values most of the times, and you do not need to type-annotate every value.
+            </p>
+
+            <p>
+                If you have prior programming experience in an imperative or eager language, Haskell can feel a bit odd
+                in
+                the beginning. Don't worry, you will feel warm and fuzzy eventually!
+            </p>
+
+            <p>
+                You may ask why we chose Haskell as the main programming language for this book, rather than a more
+                mainstream language. During our own experiences developing natural language processing tools, we noticed
+                that very many natural language processing tasks are relatively straightforward data transformations.
+                Haskell is a language that is exceptionally good at data transformations. First of all, because it has
+                higher order functions (functions that take functions as an argument) that traverse lists, sets,
+                mappings,
+                etc. Second, Haskell makes it easy to construct more complex transformations out of simple
+                transformations.
+            </p>
+
+            <p>
+                Although this book does not provide a full introduction to the Haskell programming language, we try to
+                cover
+                Haskell concepts extensively when required. If you require more background on certain concepts, we
+                recommend
+                you to consult the free book <a href="http://learnyouahaskell.com/">Learn Haskell for Great Good!</a>
+            </p>
+        </div>
+
+        <div>
+            <h3>2.1 Haskell isn't your typical language</h3>
+
+            <p>If you've come from java, python or any other imperative language then you may have heard about some of
+                Haskell's features.. or you may not have, so let's talk a bit about them.</p>
+
+            <p>More detail here.</p>
+        </div>
+
+        <div>
+            <h3>2.2 Getting up and running</h3>
+
+            <p>To work with this book, you need the Haskell Platform and a text editor. The Haskell Platform is
+                available
+                for Mac OS X, Windows, and Linux at: <a href="http://hackage.haskell.org/platform/" target="_blank">http://hackage.haskell.org/platform/</a>.
+                Download the package for your
+                platform, and install it.
+            </p>
+
+            <p>
+                If you do not use one of these platforms, not all is lost. First of all, you should download the ghc
+                Haskell
+                compiler. If you operating system provides a ports system or package manager, use it to locate and
+                install a
+                ghc package. If your operating system does not provide a port or package for ghc, you can still try to
+                download a binary distribution from the GHC website. Once you have installed and set up ghc, install the
+                packages of the Haskell Platform.
+            </p>
+
+            <p>
+                For the text editor, pick any editor you find comfortable, as long as it saves files as plain text.
+                Programming Haskell becomes more comfortable if you have an editor with syntax highlighting and
+                interpreter
+                integration. Your authors prefer the Emacs editor with haskell-mode. haskell-mode provides good support
+                for
+                highlighting, and Haskell code formatting. Besides that, Emacs allows you to run the ghci Haskell
+                interpreter within the editor.
+            </p>
+
+            <h4>2.2.1 Editors</h4>
+
+            <p>
+                If you don't like emacs (weirdo) and have no idea what <a
+                    href="https://en.wikipedia.org/wiki/Editor_war"
+                    target="_blank">the editor wars</a>
+                are, then you probably want to use something like <a href="https://atom.io/" target="_blank">atom</a> or
+                <a
+                        href="http://www.sublimetext.com/" target="_blank">sublime text</a>. Both are excellent.
+            </p>
+        </div>
+
+        <div>
+            <h3>2.3 Baby's first Haskell</h3>
+
+            <p>You will probably want to get acquainted with the ghci Haskell interpreter. It allows you to try Haskell
+                expressions and get immediate feedback.</p>
+
+            <p>On OS X or Linux systems, type ghci -XNoMonomorphismRestriction in a terminal
+                to launch the interpreter. You will be greeted with a prompt that resembles the following:</p>
+
+            <script src="https://gist.github.com/hamishdickson/e357d715f911d6da3da6.js"></script>
+
+            <p>On Windows, choose Start -> All Programs -> Haskell Platform -> WinGHCi. The first time, you should set
+                the
+                NoMonomorphismRestriction option that is required for some examples. Do this by going to the following
+                item:
+                File > Options > GHCi Startup. Then append -XNoMonomorphismRestriction in the field (make sure that
+                there is
+                a space before this addition). Click OK, and restart WinGHCi.</p>
+        </div>
+
+        <hr class="col-md-12">
+
     </div>
-
-    <hr class="col-md-12">
-
-    <div class="col-md-6">
-        <h2>1. Introduction</h2>
-
-        <h3>1.1 Welcome</h3>
-
-        <p>The Internet and the World Wide Web have changed mankind, forever. It is to early too tell, but their impact
-            may
-            be as great as the combustion engine or the introduction of electric devices. The Internet gave universal
-            access
-            to information, not just information that broadcasters or newspapers thought that was important, but
-            information
-            that interests the 'websurfer'. However the Internet is not a one-way street, every Internet user is also a
-            producer: people make websites, maintain blogs, post tweets, and socialize via social networks.</p>
-
-        <p>Since a substantial part of the world has Internet access, and every user is also a producer, there is an
-            enormous amount of information available. Some of it is of peer-reviewed and of a high quality, most of it
-            is
-            unchecked and biased. Still, every single piece of information can contain valuable information. For
-            instance,
-            as a vacuum cleaner producer, you might think that social media are not so interesting. However, the
-            contrary is
-            true: between billions of messages there may be hundreds expressing sentiment about your product. Such
-            messages
-            can answer questions about how your brand is conceived, what problems people commonly have with your
-            product,
-            etc.</p>
-
-        <p>Obviously, it is out of anyone's reach to manually analyze a significant portion of the information that is
-            available on the Internet. The amount is just too overwhelming. Classic data analysis tools may not suffice
-            either, most of the information is seemingly unstructured, and consist of blobs of natural language
-            sentences.
-            However, language is also structure. It is just not the kind of structure that computers can normally deal
-            with.
-            Computers deal with neat XML files, fragments of JSON, or comma separated values. No, it is the structure
-            that
-            we humans use to convey and transfer meaning. This book is about that type of information. We will go into
-            many
-            of the techniques that so-called computational linguists use to analyze the structure of human language, and
-            transform it into a form that computers work with.</p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>1.2 Who is this book for?</h3>
-        <p>Anyone who has a few years programming with a language like C++, java, python, php, ruby - something rich,
-        but not purely functional. While this book isn't about Haskell or Functional Programming, we will go through
-        the concepts as required and it will hopefully be pretty much self contained.</p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>1.3 Help! I'm stuck!</h3>
-        <p>If you're stuck on any of the material in this book, then Google really is your friend - if that doesn't work
-        then please get in touch - I'm easy enough to contact and if I can help I will (then probably update the book
-        to help others!)</p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>1.2 What is natural language processing?</h3>
-
-        <p>Well, right from wikipedia: "Natural language processing (NLP) is a field of computer science, artificial
-            intelligence, and computational linguistics concerned with the interactions between computers and human
-            (natural) languages. As such, NLP is related to the area of human–computer interaction. Many challenges in
-            NLP involve natural language understanding, that is, enabling computers to derive meaning from human or
-            natural language input, and others involve natural language generation."</p>
-    </div>
-
-    <hr class="col-md-12">
-
-    <div class="col-md-6">
-        <h2>2. Haskell</h2>
-
-        <h3>2.1 What's a Haskell?</h3>
-
-        <p>Haskell is a static, pure, lazy, functional language. Gee, that sounds an awful lot like buzzword lingo! That
-            may well be, but these properties make Haskell a very effective language, and sometimes a bit odd. These
-            properties are also opposite to most mainstream languages. For instance, Java is static, impure, eager, and
-            not functional, Ruby is dynamic, impure, eager, and only functional at times. While it is hard to give an
-            accurate definition of every characteristic, we will try anyway.
-        </p>
-
-        <p>
-            Functional: Haskell puts an emphasis on functions and treats computation as the evaluation of functions.
-            This in contrast to so-called imperative languages, that specify an order of instructions. As such, Haskell
-            functions very often resemble mathematical functions closely. Being functional also has practical
-            implications. For instance, iteration is accomplished by means of recursion, and functions are also values
-            and can be passed to other functions.
-        </p>
-
-        <p>
-            Pure: Haskell is a pure language, in that functions do not have side-effects. This means that existing
-            values cannot be changed, since changing data would be a side-effect of a function. It also guarantees that
-            the evaluation of a function will always result in the same value given the same function arguments.
-        </p>
-
-        <p>
-            Lazy: As a lazy language, Haskell only evaluates expressions when needed. Say you just implemented a
-            function that gives a list of all prime numbers. In a strict language, the function that makes the list will
-            never terminate (since there are always more prime numbers). Haskell, on the contrary, will only evaluate
-            this function when and as much as necessary. As long as you take a finite number of primes from the list,
-            the program will happily terminate.
-        </p>
-
-        <p>
-            Static: Haskell programs are compiled before they can run. This means that the Haskell compiler will catch
-            many errors for you at compile-time, rather than finding them when your program is used in production.
-            Additionally, Haskell does type-inference. This means that the Haskell compiler can find out the types of
-            values most of the times, and you do not need to type-annotate every value.
-        </p>
-
-        <p>
-            If you have prior programming experience in an imperative or eager language, Haskell can feel a bit odd in
-            the beginning. Don't worry, you will feel warm and fuzzy eventually!
-        </p>
-
-        <p>
-            You may ask why we chose Haskell as the main programming language for this book, rather than a more
-            mainstream language. During our own experiences developing natural language processing tools, we noticed
-            that very many natural language processing tasks are relatively straightforward data transformations.
-            Haskell is a language that is exceptionally good at data transformations. First of all, because it has
-            higher order functions (functions that take functions as an argument) that traverse lists, sets, mappings,
-            etc. Second, Haskell makes it easy to construct more complex transformations out of simple transformations.
-        </p>
-
-        <p>
-            Although this book does not provide a full introduction to the Haskell programming language, we try to cover
-            Haskell concepts extensively when required. If you require more background on certain concepts, we recommend
-            you to consult the free book <a href="http://learnyouahaskell.com/">Learn Haskell for Great Good!</a></p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>2.1 Haskell isn't your typical language</h3>
-        <p>If you've come from java, python or any other imperative language then you may have heard about some of
-        Haskell's features.. or you may not have, so let's talk a bit about them.</p>
-
-        <p>More detail here.</p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>2.2 Getting up and running</h3>
-
-        <p>To work with this book, you need the Haskell Platform and a text editor. The Haskell Platform is available
-            for Mac OS X, Windows, and Linux at: <a href="http://hackage.haskell.org/platform/" target="_blank">http://hackage.haskell.org/platform/</a>.
-            Download the package for your
-            platform, and install it.
-        </p>
-
-        <p>
-            If you do not use one of these platforms, not all is lost. First of all, you should download the ghc Haskell
-            compiler. If you operating system provides a ports system or package manager, use it to locate and install a
-            ghc package. If your operating system does not provide a port or package for ghc, you can still try to
-            download a binary distribution from the GHC website. Once you have installed and set up ghc, install the
-            packages of the Haskell Platform.
-        </p>
-
-        <p>
-            For the text editor, pick any editor you find comfortable, as long as it saves files as plain text.
-            Programming Haskell becomes more comfortable if you have an editor with syntax highlighting and interpreter
-            integration. Your authors prefer the Emacs editor with haskell-mode. haskell-mode provides good support for
-            highlighting, and Haskell code formatting. Besides that, Emacs allows you to run the ghci Haskell
-            interpreter within the editor.
-        </p>
-
-        <h4>2.2.1 Editors</h4>
-
-        <p>
-            If you don't like emacs (weirdo) and have no idea what <a href="https://en.wikipedia.org/wiki/Editor_war"
-                                                                      target="_blank">the editor wars</a>
-            are, then you probably want to use something like <a href="https://atom.io/" target="_blank">atom</a> or <a
-                href="http://www.sublimetext.com/" target="_blank">sublime text</a>. Both are excellent.
-        </p>
-    </div>
-
-    <div class="col-md-6">
-        <h3>2.3 Baby's first Haskell</h3>
-
-        <p>You will probably want to get acquainted with the ghci Haskell interpreter. It allows you to try Haskell
-            expressions and get immediate feedback.</p>
-
-        <p>On OS X or Linux systems, type ghci -XNoMonomorphismRestriction in a terminal
-            to launch the interpreter. You will be greeted with a prompt that resembles the following:</p>
-
-        <script src="https://gist.github.com/hamishdickson/e357d715f911d6da3da6.js"></script>
-
-        <p>On Windows, choose Start -> All Programs -> Haskell Platform -> WinGHCi. The first time, you should set the
-            NoMonomorphismRestriction option that is required for some examples. Do this by going to the following item:
-            File > Options > GHCi Startup. Then append -XNoMonomorphismRestriction in the field (make sure that there is
-            a space before this addition). Click OK, and restart WinGHCi.</p>
-    </div>
-
-    <hr class="col-md-12">
-
 </div>
 
 <div class="container footer">

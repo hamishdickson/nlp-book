@@ -2,6 +2,11 @@ body {
     padding-top: 50px;
 }
 
+#side-nav ul {
+    padding-top: 10%;
+    position: fixed;
+}
+
 #footer {
     text-align: center;
 }
