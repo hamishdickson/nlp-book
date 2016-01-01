@@ -18,7 +18,7 @@ If you have prior programming experience in an imperative or eager language, Has
 
 You may ask why we chose Haskell as the main programming language for this book, rather than a more mainstream language. During our own experiences developing natural language processing tools, we noticed that very many natural language processing tasks are relatively straightforward data transformations. Haskell is a language that is exceptionally good at data transformations. First of all, because it has higher order functions (functions that take functions as an argument) that traverse lists, sets, mappings, etc. Second, Haskell makes it easy to construct more complex transformations out of simple transformations.
 
-Although this book does not provide a full introduction to the Haskell programming language, we try to cover Haskell concepts extensively when required. If you require more background on certain concepts, we recommend you to consult the free book <a href="http://learnyouahaskell.com/">Learn Haskell for Great Good!
+Although this book does not provide a full introduction to the Haskell programming language, we try to cover Haskell concepts extensively when required. If you require more background on certain concepts, we recommend you to consult the free book [Learn Haskell for Great Good!](http://learnyouahaskell.com/)
 
 ## 2.1 Haskell isn't your typical language
 
@@ -36,14 +36,18 @@ For the text editor, pick any editor you find comfortable, as long as it saves f
 
 ### 2.2.1 Editors
 
-If you don't like emacs (weirdo) and have no idea what [https://en.wikipedia.org/wiki/Editor_war](the editor wars) are, then you probably want to use something like [https://atom.io/](atom) [http://www.sublimetext.com/](sublime text). Both are excellent.
+If you don't like emacs (weirdo) and have no idea what [the editor wars](https://en.wikipedia.org/wiki/Editor_war) are, then you probably want to use something like [atom](https://atom.io/) [sublime text](http://www.sublimetext.com/). Both are excellent.
 
 ## 2.3 Baby's first Haskell
 
-You will probably want to get acquainted with the ghci Haskell interpreter. It allows you to try Haskell expressions and get immediate feedback.
+You will probably want to get acquainted with the GHCi Haskell interpreter. It allows you to try Haskell expressions and get immediate feedback.
 
 On OS X or Linux systems, type `ghci -XNoMonomorphismRestriction` in a terminal to launch the interpreter. You will be greeted with a prompt that resembles the following:
 
-            <script src="https://gist.github.com/hamishdickson/e357d715f911d6da3da6.js"></script>
+```shell
+$ ghci -XNoMonomorphismRestriction
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+Prelude>
+```
 
-On Windows, choose Start -> All Programs -> Haskell Platform -> WinGHCi. The first time, you should set the NoMonomorphismRestriction option that is required for some examples. Do this by going to the following item: File > Options > GHCi Startup. Then append -XNoMonomorphismRestriction in the field (make sure that there is a space before this addition). Click OK, and restart WinGHCi.
+On Windows, choose **Start -> All Programs -> Haskell Platform -> WinGHCi**. The first time, you should set the `NoMonomorphismRestriction` option that is required for some examples. Do this by going to the following item: **File > Options > GHCi Startup**. Then append `-XNoMonomorphismRestriction` in the field (make sure that there is a space before this addition). Click OK, and restart WinGHCi.
