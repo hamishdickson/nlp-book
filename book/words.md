@@ -96,91 +96,97 @@ Prelude> :type head
 head :: [a] -> a
 ```
 
-Hey, two *a* 's! Equipped with the knowledge we have, we know that
-                <function>head</function> is a function that takes a list of something, and gives
-            back something. But there is an additional constraint here: although
-                <emphasis>a</emphasis> is some type, all <emphasis>a</emphasis>'s have to be the
-            same type. So, applying <function>head</function> to a list of numbers gives a number,
-            applying <function>head</function> to a list of characters gives a character, etc. </para>
-        <para>In analogy, the type of <function>tail</function> should now be easy to understand: </para>
-        <para>
-            <screen>Prelude> <userinput>:type tail</userinput>
-tail :: [a] -> [a] </screen>
-        </para>
-        <para>We apply <function>tail</function> to a list of some type, and get back a list with
-            the same type. </para>
-        <para>Finally, the last function for now is <function>reverse</function>. We have to admit
-            presenting this function with a bit of joy, since it will allow us to write our first
-            little useful Haskell program. As expected, <function>reverse</function> reverses the
-            elements of a list: </para>
-        <para>
-            <screen>Prelude> <userinput>reverse "hello"</userinput>
-"olleh"</screen>
-        </para>
-        <para>
-            Olé! And another one:
-        </para>
-        <para>
-            <screen>Prelude> <userinput>reverse "level"</userinput>
-"level"</screen>
-        </para>
-        <para>Hold on there! We bumped into a <emphasis role="italic">palindrome</emphasis>: a word
-            that is read the same way, no matter whether it is read forward or backward. Now,
-            suppose we would like to write our own function to determine whether a word is a
-            palindrome. We first need to make a slightly more formal definition of a palindrome: a
-            word is a palindrome if it is equal to its reverse. In Haskell we can compare values
-            using the <function>==</function> operator: </para>
-        <para>
-            <screen>Prelude> <userinput>"hello" == "hello"</userinput>
+Hey, two *a* 's! Equipped with the knowledge we have, we know that `head` is a function that takes a list of something, and gives back something. But there is an additional constraint here: although *a* is some type, all *a* 's have to be the same type. So, applying `head` to a list of numbers gives a number, applying `head` to a list of characters gives a character, etc.
+
+In analogy, the type of `tail` should now be easy to understand:
+
+```haskell
+Prelude> :type tail
+tail :: [a] -> [a]
+```
+
+We apply `tail` to a list of some type, and get back a list with the same type.
+
+Finally, the last function for now is `reverse`. We have to admit presenting this function with a bit of joy, since it will allow us to write our first little useful Haskell program. As expected, `reverse` reverses the elements of a list:
+
+```haskell
+Prelude> reverse "hello"
+"olleh"
+```
+
+Olé! And another one:
+
+```haskell
+Prelude> reverse "level"
+"level"
+```
+
+Hold on there! We bumped into a **palindrome** a word that is read the same way, no matter whether it is read forward or backward. Now, suppose we would like to write our own function to determine whether a word is a palindrome. We first need to make a slightly more formal definition of a palindrome: a word is a palindrome if it is equal to its reverse. In Haskell we can compare values using the `==` operator:
+
+```haskell
+Prelude> "hello" == "hello"
 True
-Prelude> <userinput>"hello" == "olleh"</userinput>
-False </screen>
-        </para>
-        <para>Such a comparison evaluates to <emphasis>True</emphasis> if both values are equal, or
-            to <emphasis>False</emphasis> in case they are not. <emphasis>True</emphasis> and
-                <emphasis>False</emphasis> are the only values of the <emphasis>Bool</emphasis>
-            type. Since <function>reverse</function> also returns a value, nothing holds us from
-            using it in comparisons: </para>
-        <para>
-            <screen>Prelude> <userinput>"hello" == reverse "hello"</userinput>
+
+Prelude> "hello" == "olleh"
 False
-Prelude> <userinput>"level" == reverse "level"</userinput>
-True </screen>
-        </para>
-        <para>The test that we devised for detecting palindromes seems to work. But it is a lot of
-            typing. Luckily, we can generalize this into a function. Let's replace both words by the
-            symbolic name <emphasis>word</emphasis> (but don't execute this in <emphasis role="bold"
-                >ghci</emphasis> yet, since it does not know this symbolic name): </para>
-        <screen>word == reverse word </screen>
-        <para>And as a next step, Let's do some magic: </para>
-        <para>
-            <screen>Prelude> <userinput>let palindrome word = word == reverse word</userinput> </screen>
-        </para>
-        <para>This defines the function <function>palindrome</function> taking one argument, and
-            binds this argument to the symbolic name <emphasis>word</emphasis>. To this function we
-            assign the expression <emphasis>word == reverse word</emphasis>. Play a little with this
-            function to be convinced that it actually works. Some examples: </para>
-        <para>
-            <screen>Prelude> <userinput>palindrome "hello"</userinput>
+```
+
+Such a comparison evaluates to *True* if both values are equal, or to False in case they are not. *True* and *False* are the only values of the *Bool* type. Since `reverse` also returns a value, nothing holds us from using it in comparisons:
+
+```haskell
+Prelude> "hello" == reverse "hello"
 False
-Prelude> <userinput>palindrome "level"</userinput>
+
+Prelude> "level" == reverse "level"
 True
-Prelude> <userinput>palindrome "racecar"</userinput>
-True </screen>
-        </para>
-        <para>If this function is still a mystery to you, it may be useful to write down the
-            application of the function stepwise for a word that is not a palindrome: </para>
-        <screen>palindrome "hello"
+```
+
+The test that we devised for detecting palindromes seems to work. But it is a lot of typing. Luckily, we can generalize this into a function. Let's replace both words by the symbolic name *word* (but don't execute this in **ghci** yet, since it does not know this symbolic name):
+
+```haskell
+word == reverse word
+```
+
+And as a next step, Let's do some magic:
+
+```haskell
+Prelude> let palindrome word = word == reverse word
+```
+
+This defines the function `palindrome` taking one argument, and binds this argument to the symbolic name `word`. To this function we assign the expression `word == reverse word`. Play a little with this function to be convinced that it actually works. Some examples:
+
+```haskell
+Prelude> palindrome "hello"
+False
+
+Prelude> palindrome "level"
+True
+
+Prelude> palindrome "racecar"
+True
+```
+
+If this function is still a mystery to you, it may be useful to write down the application of the function stepwise for a word that is not a palindrome:
+
+```haskell
+palindrome "hello"
 palindrome "hello" = "hello" == reverse "hello"
 palindrome "hello" = "hello" == "olleh"
-palindrome "hello" = False     </screen>
-        <para>and a word that <emphasis>is</emphasis> a palindrome: </para>
-        <screen>palindrome "racecar"
+palindrome "hello" = False
+```
+
+and a word that *is* a palindrome:
+
+```haskell
+palindrome "racecar"
 palindrome "racecar" = "racecar" == reverse "racecar"
 palindrome "racecar" = "racecar" == "racecar"
-palindrome "racecar" = True</screen>
-        <para>Congratulations, you have made your first function, which is in essence a small
-            program! </para>
+palindrome "racecar" = True
+```
+
+Congratulations, you have made your first function, which is in essence a small program!
+
+
     </sect1>
     <sect1 xml:id="sec-words-to-sentences">
         <title>From words to sentences</title>
