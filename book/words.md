@@ -187,65 +187,53 @@ palindrome "racecar" = True
 Congratulations, you have made your first function, which is in essence a small program!
 
 
-    </sect1>
-    <sect1 xml:id="sec-words-to-sentences">
-        <title>From words to sentences</title>
-        <para>So far, we have looked at words in isolation. However, in language, words are often
-            combined to form a higher level of meaning representation: a sentence. Provided what we
-            have learned about representing words in Haskell, the step towards representing
-            sentences should be a minor one. We could, for example, represent sentences in the
-            exactly the same way we represented words: </para>
-        <para>
-            <screen>Prelude> <userinput>"The cat is on the mat."</userinput>
-"The cat is on the mat." </screen>
-        </para>
-        <para>That's fine for a beginning, although not so convenient. Let us see why. Assume we ask
-            you to give us the first word of a sentence. In the previous section, we learned that
-                <function>head</function> can be used to get the first element of a list. Let's try
-            to apply that here: </para>
-        <para>
-            <screen>Prelude> <userinput>head "The cat is on the mat."</userinput>
-'T' </screen>
-        </para>
-        <para>As you probably expected, that didn't work. We represented a sentence as a list of
-            characters (a string), and hence asking for the first element will give the first
-            character. But wait! What if we represented a sentence as a list of words? </para>
-        <para>
-            <screen>Prelude> <userinput>["The", "cat", "is", "on", "the", "mat", "."]</userinput>
+## From words to sentences
+
+So far, we have looked at words in isolation. However, in language, words are often combined to form a higher level of meaning representation: a sentence. Provided what we have learned about representing words in Haskell, the step towards representing sentences should be a minor one. We could, for example, represent sentences in the exactly the same way we represented words:
+
+```haskell
+Prelude> "The cat is on the mat."
+"The cat is on the mat."
+```
+
+That's fine for a beginning, although not so convenient. Let us see why. Assume we ask you to give us the first word of a sentence. In the previous section, we learned that `head` can be used to get the first element of a list. Let's try to apply that here:
+
+```haskell
+Prelude> head "The cat is on the mat."
+'T'
+```
+
+As you probably expected, that didn't work. We represented a sentence as a list of characters (a string), and hence asking for the first element will give the first character. But wait! What if we represented a sentence as a list of words?
+
+```haskell
+Prelude> ["The", "cat", "is", "on", "the", "mat", "."]
 ["The","cat","is","on","the","mat","."]
-Prelude> <userinput>:type ["The", "cat", "is", "on", "the", "mat", "."]</userinput>
-["The", "cat", "is", "on", "the", "mat", "."] :: [[Char]]</screen>
-        </para>
-        <para>Nifty! We just constructed a list, of a list of characters. Though, you may wonder why
-            we made the punctuation at the end of the sentence a separate "word". Well, this is
-            mostly a pragmatic choice, because gluing this punctuation sign to
-                <emphasis>mat</emphasis> does not really form a word either. Having the period sign
-            separate is more practical for future processing. Hence, formally we say that a sentence
-            consists of tokens, where a token can be a word, a number, and a punctuation sign. </para>
-        <para>Rinse and repeat: </para>
-        <para>
-            <screen>Prelude> <userinput>head ["The", "cat", "is", "on", "the", "mat", "."]</userinput>
-"The"</screen>
-        </para>
-        <para>Since a word is also a list, we can apply a function to words as well. For example, we
-            can get the first character of the first word by applying <function>head</function>, to
-            the <function>head</function> of a sentence: </para>
-        <para>
-            <screen>Prelude> <userinput>head (head ["The", "cat", "is", "on", "the", "mat", "."])</userinput>
-'T'</screen>
-        </para>
-        <para>Note that we need parenthesis to force Haskell to evaluate the part in parentheses
-            first. If we do not enforce this order of evaluation, Haskell will try to evaluate
-                <emphasis>head head</emphasis> first, which makes no sense. Remember that
-                <function>head</function> requires a list as its argument, and
-                <function>head</function> is not a list. </para>
-        <para>Now that we know how to represent sentence, this is a good time to try to write yet
-            another small program. This time, we will write a function to compute the average token
-            length in a corpus (a collection of texts). Since we did not look at real corpora yet,
-            pick any sentence you like as <emphasis>My Little Corpus</emphasis>™. The authors will
-            use <emphasis>&quot;Oh, no, flying pink ponies!&quot;</emphasis> The average token
-            length is the sum of the lengths of all tokens, divided by the total number of tokens in
-            the corpus. So, stepwise, we have to: </para>
+
+Prelude> :type ["The", "cat", "is", "on", "the", "mat", "."]
+["The", "cat", "is", "on", "the", "mat", "."] :: [[Char]]
+```
+
+Nifty! We just constructed a list, of a list of characters. Though, you may wonder why we made the punctuation at the end of the sentence a separate "word". Well, this is mostly a pragmatic choice, because gluing this punctuation sign to *mat* does not really form a word either. Having the period sign separate is more practical for future processing. Hence, formally we say that a sentence consists of tokens, where a token can be a word, a number, and a punctuation sign. </para>
+
+Rinse and repeat:
+
+```haskell
+Prelude> head ["The", "cat", "is", "on", "the", "mat", "."]
+"The"
+```
+
+Since a word is also a list, we can apply a function to words as well. For example, we can get the first character of the first word by applying `head`, to the `head` of a sentence:
+
+```haskell
+Prelude> head (head ["The", "cat", "is", "on", "the", "mat", "."])
+'T'
+```
+
+Note that we need parenthesis to force Haskell to evaluate the part in parentheses first. If we do not enforce this order of evaluation, Haskell will try to evaluate `head head` first, which makes no sense. Remember that `head` requires a list as its argument, and `head` is not a list.
+
+Now that we know how to represent sentence, this is a good time to try to write yet another small program. This time, we will write a function to compute the average token length in a corpus (a collection of texts). Since we did not look at real corpora yet, pick any sentence you like as *My Little Corpus™* . The authors will use "Oh, no, flying pink ponies!" The average token length is the sum of the lengths of all tokens, divided by the total number of tokens in the corpus. So, stepwise, we have to:
+
+
         <orderedlist numeration="arabic">
             <listitem>
                 <para>
