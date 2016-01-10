@@ -234,120 +234,79 @@ Note that we need parenthesis to force Haskell to evaluate the part in parenthes
 Now that we know how to represent sentence, this is a good time to try to write yet another small program. This time, we will write a function to compute the average token length in a corpus (a collection of texts). Since we did not look at real corpora yet, pick any sentence you like as *My Little Corpus™* . The authors will use "Oh, no, flying pink ponies!" The average token length is the sum of the lengths of all tokens, divided by the total number of tokens in the corpus. So, stepwise, we have to:
 
 
-        <orderedlist numeration="arabic">
-            <listitem>
-                <para>
-                    Get the length of each token in the corpus.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Sum the lengths of the tokens.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Divide the sum by the length of the corpus.
-                </para>
-            </listitem>
-        </orderedlist>
-        <para>
-            You know how to get the in characters length of a single token:
-        </para>
-        <para>
-            <screen>Prelude> <userinput>length "flying"</userinput>
-6</screen>
-        </para>
-        <para>Since you are lazy, you are not going to apply <function>length</function> to every
-            token in the corpus manually. Instead we want tell Haskell &quot;Hey Haskell! Please
-            apply this length function to each element of the list.&quot; It turns out that Haskell
-            has a function to do this which is called <function>map</function>. Time to inspect
-                <function>map</function>: </para>
-        <para>
-            <screen>Prelude> <userinput>:type map</userinput>
-map :: (a -> b) -> [a] -> [b]</screen>
-        </para>
-        <para>And we are in for another surprise. The most surprising element is probably the first
-            element in the type signature, <emphasis>(a -&gt; b)</emphasis>. Also surprising is that
-            we now see three types, <emphasis>(a -&gt; b)</emphasis>, <emphasis>[a]</emphasis> and
-                <emphasis>[b]</emphasis>. The latter is simple: this function takes two arguments,
-                <emphasis>(a -&gt; b)</emphasis> and <emphasis>[a]</emphasis>, and returns
-                <emphasis>[b]</emphasis>. <emphasis>(a -&gt; b)</emphasis> as the notation suggests,
-            is a function taking an <emphasis>a</emphasis> and returning a <emphasis>b</emphasis>.
-            So, <function>map</function> is actually a function that takes a function as its
-            argument, or in functional programming-speak: a <emphasis>higher order</emphasis>
-            function. </para>
-        <para>So, <function>map</function> is a function that takes a function that maps from
-                <emphasis>a</emphasis> to <emphasis>b</emphasis>, takes a list of
-                <emphasis>a</emphasis>s, and returns a list of <emphasis>b</emphasis>s. That looks a
-            suspicious lot like what we want! We have a list of tokens represented as strings, the
-            function length that takes a list and returns its length as an integer, and we want to
-            have a list of integers representing the lengths. Looks like we have a winner! </para>
-        <para>
-            <screen>Prelude> <userinput>map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies","!"]</userinput>
-[2,1,2,1,6,1,4,6,1]</screen>
-        </para>
-        <para>We have now completed our first step: we have the length of each token in the corpus.
-            Next, we have to sum the lengths that we have just retrieved. Fortunately, Haskell has a
-                <function>sum</function> function: </para>
-        <para>
-            <screen>Prelude> <userinput>:type sum</userinput>
-sum :: (Num a) => [a] -> a</screen>
-        </para>
-        <para>This function takes a list of <emphasis>a</emphasis>s, and returns an
-                <emphasis>a</emphasis>. But where did the <emphasis>(Num a) =&gt;</emphasis> come
-            from? Well, <emphasis>Num</emphasis> is a so-called <emphasis role="italic"
-                >typeclass</emphasis>. A type can belong to one or more of such typeclasses. But
-            belonging to a typeclass does not come without cost. In fact, it requires that certain
-            functions need to be defined for types that belong to it. For instance, the typeclass
-                <emphasis>Num</emphasis> is a typeclass for numbers, which requires amongst others,
-            functions that define addition or subtraction. Coming back to the type signature,
-                <function>sum</function> will sum a list of <emphasis>a</emphasis>s, but not just
-            any <emphasis>a</emphasis>s, only those that belong to the typeclass
-                <emphasis>Num</emphasis>. And after all, this makes sense, doesn't it? We cannot sum
-            strings or planets, but we can sum numbers. In fact, we can only sum numbers. </para>
-        <para>After this solemn introduction into typeclasses, feel free to take a cup of tea (or
-            coffee), and try step two: </para>
-        <para>
-            <screen>Prelude> <userinput>:{
+- Get the length of each token in the corpus.
+- Sum the lengths of the tokens.
+- Divide the sum by the length of the corpus.
+
+You know how to get the in characters length of a single token:
+
+```haskell
+Prelude> length "flying"
+6
+```
+
+Since you are lazy, you are not going to apply `length` to every token in the corpus manually. Instead we want tell Haskell "Hey Haskell! Please apply this length function to each element of the list". It turns out that Haskell has a function to do this which is called `map`. Time to inspect `map`:
+
+```haskell
+Prelude> :type map
+map :: (a -> b) -> [a] -> [b]
+```
+
+And we are in for another surprise. The most surprising element is probably the first element in the type signature, *(a > b)*. Also surprising is that we now see three types, `(a > b)`, `[a]` and `[b]`. The latter is simple: this function takes two arguments, `(a > b)` and `[a]`, and returns `[b]`. `(a > b)` as the notation suggests, is a function taking an *a* and returning a `b`. So, `map` is actually a function that takes a function as its argument, or in functional programming-speak: a *higher order* function.
+
+So, `map` is a function that takes a function that maps from `a` to `b`, takes a list of `a`s, and returns a list of `b`s. That looks a suspicious lot like what we want! We have a list of tokens represented as strings, the function length that takes a list and returns its length as an integer, and we want to have a list of integers representing the lengths. Looks like we have a winner!
+
+```haskell
+Prelude> map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies","!"]
+[2,1,2,1,6,1,4,6,1]
+```
+
+We have now completed our first step: we have the length of each token in the corpus. Next, we have to sum the lengths that we have just retrieved. Fortunately, Haskell has a `sum` function:
+
+```haskell
+Prelude> :type sum
+sum :: (Num a) => [a] -> a
+```
+
+This function takes a list of `a`s, and returns an `a`. But where did the `(Num a) =>` come from? Well, `Num` is a so-called *typeclass*. A type can belong to one or more of such typeclasses. But belonging to a typeclass does not come without cost. In fact, it requires that certain functions need to be defined for types that belong to it. For instance, the typeclass `Num` is a typeclass for numbers, which requires amongst others, functions that define addition or subtraction. Coming back to the type signature, `sum` will sum a list of `a`s, but not just any `a`s, only those that belong to the typeclass `Num`. And after all, this makes sense, doesn't it? We cannot sum strings or planets, but we can sum numbers. In fact, we can only sum numbers.
+
+
+After this solemn introduction into typeclasses, feel free to take a cup of tea (or coffee), and try step two:
+
+```haskell
+Prelude> :{
 sum (map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"])
-:}</userinput>
-24</screen>
-        </para>
-        <para>By now, you will probably smell victory. The only step that remains is to divide the
-            sum by the length of the sentence using the division operator (<emphasis>/</emphasis>): </para>
-        <para>
-            <screen>Prelude> <userinput>:{
+:}
+24
+```
+
+By now, you will probably smell victory. The only step that remains is to divide the sum by the length of the sentence using the division operator (`/`):
+
+```haskell
+Prelude> :{
 sum (map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"]) /
   length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"]
-:}</userinput>
+:}
 
-&lt;interactive>:1:0:
-    No instance for (Fractional Int)
-      arising from a use of `/' at &lt;interactive>:1:0-136
-    Possible fix: add an instance declaration for (Fractional Int)
+<interactive>:18:79:
+    No instance for (Fractional Int) arising from a use of ‘/’
     In the expression:
-          sum (map length ["Oh", ",", "no", ",", ....])
-        / length ["Oh", ",", "no", ",", ....]
-    In the definition of `it':
-        it = sum (map length ["Oh", ",", "no", ....])
-           / length ["Oh", ",", "no", ....]</screen>
-        </para>
-        <para>And we have... Failure! I hope you poured yourself a cup of herb tea! (again
-            alternatively: espresso!) While this is all a bit cryptic, the second line (<emphasis>No
-                instance for (Fractional Int)</emphasis>) gives some idea where the trouble stems
-            from. <emphasis>Fractional</emphasis> is typeclass for fractional numbers, and Haskell
-            complains that Int is not defined to be of the typeclass
-            <emphasis>Fractional</emphasis>. This sounds obvious, since an integer is not a
-            fractional number. In other words, Haskell is trying to tell us that there is an
-                <emphasis>Int</emphasis> in some place where it expected a type belonging to the
-            typeclass <emphasis>Fractional</emphasis>. Since the division is the only new component,
-            it is the first suspect of the breakdown: </para>
-        <para>
-            <screen>Prelude> <userinput>:type (/)</userinput>
-(/) :: (Fractional a) => a -> a -> a</screen>
-        </para>
-        <para>First off, notice that we have put the division operator in parentheses. We have done
+      sum (map length ["Oh", ",", "no", ",", ....])
+      / length ["Oh", ",", "no", ",", ....]
+    In an equation for ‘it’:
+        it
+          = sum (map length ["Oh", ",", "no", ....])
+            / length ["Oh", ",", "no", ....]
+```
+
+And we have... Failure! I hope you poured yourself a cup of herb tea! (again alternatively: espresso!) While this is all a bit cryptic, the second line (`No instance for (Fractional Int)`) gives some idea where the trouble stems from. `Fractional` is typeclass for fractional numbers, and Haskell complains that Int is not defined to be of the typeclass `Fractional`. This sounds obvious, since an integer is not a fractional number. In other words, Haskell is trying to tell us that there is an `Int` in some place where it expected a type belonging to the typeclass `Fractional`. Since the division is the only new component, it is the first suspect of the breakdown:
+
+```haskell
+Prelude> :type (/)
+(/) :: (Fractional a) => a -> a -> a
+```
+
+First off, notice that we have put the division operator in parentheses. We have done
             this because the division operator is used as a so-called <emphasis>infix
                 function</emphasis>: it is a function that is put between its arguments (like
                 <emphasis>1.0 / 2.0</emphasis>). By putting an infix operator in parentheses, you
