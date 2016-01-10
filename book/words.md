@@ -306,86 +306,74 @@ Prelude> :type (/)
 (/) :: (Fractional a) => a -> a -> a
 ```
 
-First off, notice that we have put the division operator in parentheses. We have done
-            this because the division operator is used as a so-called <emphasis>infix
-                function</emphasis>: it is a function that is put between its arguments (like
-                <emphasis>1.0 / 2.0</emphasis>). By putting an infix operator in parentheses, you
-            are stating that you would like to use it as a regular function. This means you can do
-            things like this: </para>
-        <para>
-            <screen>Prelude> <userinput>(/) 1.0 2.0</userinput>
-0.5</screen>
-        </para>
-        <para>Anyway, the verdict of the type signature of <function>(/)</function> is clear, it
-            requires two arguments that belong to the <emphasis>Fractional</emphasis> typeclass. The
-            sum and length that we calculated clearly do not belong to this typeclass, since they
-            are of the type <emphasis>Int</emphasis>: </para>
-        <para>
-            <screen>Prelude> <userinput>:{
+First off, notice that we have put the division operator in parentheses. We have done this because the division operator is used as a so-called `infix function`: it is a function that is put between its arguments (like `1.0 / 2.0`). By putting an infix operator in parentheses, you are stating that you would like to use it as a regular function. This means you can do things like this:
+
+```haskell
+Prelude> (/) 1.0 2.0
+0.5
+```
+
+Anyway, the verdict of the type signature of `(/)` is clear, it requires two arguments that belong to the `Fractional` typeclass. The sum and length that we calculated clearly do not belong to this typeclass, since they are of the type `Int`:
+
+```haskell
+Prelude> :{
 :type
   sum (map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"])
-:}</userinput>
+:}
 sum (map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"])
   :: Int
-Prelude> <userinput>:{
+Prelude> :{
 :type
   length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"]
-:}</userinput>
+:}
 length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"]
-  :: Int</screen>
-        </para>
-        <para>Fortunately, Haskell provides the function <function>fromIntegral</function> that
-            converts an integer to any kind of number. Add <function>fromIntegral</function>, and
-            you surely do get the average token length of the corpus: </para>
-        <para>
-            <screen>Prelude> <userinput>:{
+  :: Int
+```  
+
+Fortunately, Haskell provides the function `fromIntegral` that converts an integer to any kind of number. Add `fromIntegral`, and you surely do get the average token length of the corpus:
+
+```haskell
+Prelude> :{
 fromIntegral
   (sum (map length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"])) /
   fromIntegral (length ["Oh", ",", "no", ",", "flying", ",", "pink", "ponies", "!"])
-:}</userinput>
-2.6666666666666665</screen>
-        </para>
-        <para>Well, that was a bumpier ride than you might have expected. Don't worry! During our
-            first forays into Haskell, we were convinced that we were too stupid for this too (and
-            here we are writing a book). However, after more practice, you will learn that Haskell
-            is actually a very simple and logical language. </para>
-        <para>Maybe it will feel more like a victory after generalizing this to a function. You can
-            follow the same pattern as in the palindrome example: replace the sentence with a
-            symbolic name and transform it into a function: </para>
-        <para>
-            <screen>Prelude> <userinput>:{
+:}
+2.6666666666666665
+```
+
+Well, that was a bumpier ride than you might have expected. Don't worry! During our first forays into Haskell, we were convinced that we were too stupid for this too (and here we are writing a book). However, after more practice, you will learn that Haskell is actually a very simple and logical language.
+
+Maybe it will feel more like a victory after generalizing this to a function. You can follow the same pattern as in the palindrome example: replace the sentence with a symbolic name and transform it into a function:
+
+```haskell        
+Prelude> :{
 let averageLength l =
   fromIntegral (sum (map length l)) / fromIntegral (length l)
-:}</userinput>
-Prelude> <userinput>:{
+:}
+Prelude> :{
 averageLength ["Oh", ",", "no", ",", "flying", ",", "pink" ,"ponies", "!"]
-:}</userinput>
-2.6666666666666665</screen>
-        </para>
-        <para>Congratulations, you just wrote your second function! But wait, you actually
-            accomplished more than you may expect. Check the type signature of
-                <function>averageLength</function>. </para>
-        <para>
-            <screen>Prelude> <userinput>:type averageLength</userinput>
-averageLength :: (Fractional b) => [[a]] -> b</screen>
-        </para>
-        <para>You made your first weird type signature. Show it off to your colleagues, significant
-            other, or dog. <function>averageLength</function> is a function that takes a list of a
-            list of <emphasis>a</emphasis>, and returns a <emphasis>b</emphasis> that belongs to the
-                <emphasis>Fractional</emphasis> typeclass. But wait, <emphasis>a</emphasis> can be
-            anything, right? What happens if we apply this function to a list of sentences? </para>
-        <para>
-            <screen>Prelude> <userinput>averageLength [["I", "like", "Haskell", "."],
+:}
+2.6666666666666665
+```
+
+Congratulations, you just wrote your second function! But wait, you actually accomplished more than you may expect. Check the type signature of `averageLength`.
+
+```haskell
+Prelude> :type averageLength
+averageLength :: (Fractional b) => [[a]] -> b
+```
+
+You made your first weird type signature. Show it off to your colleagues, significant other, or dog. `averageLength` is a function that takes a list of a list of `a`, and returns a `b` that belongs to the `Fractional` typeclass. But wait, `a` can be anything, right? What happens if we apply this function to a list of sentences?
+
+```haskell
+Prelude> averageLength [["I", "like", "Haskell", "."],
   ["Ruby", "rocks", "too", "."],
-  ["Who", "needs", "Java", "?"]]</userinput>
-4.0</screen>
-        </para>
-        <para>Woo! That's the average sentence length, expressed in number of words. It turns out
-            that, although we set out to make a function to calculate the average token length, we
-            wrote a function that calculates the average length of lists in a list (e.g., characters
-            in words, words in sentences, or sentences in a text). This happens very often when you
-            write Haskell programs: lots of functions are generic and can be reused for other tasks. </para>
-    </sect1>
+  ["Who", "needs", "Java", "?"]]
+4.0
+```
+
+Woo! That's the average sentence length, expressed in number of words. It turns out that, although we set out to make a function to calculate the average token length, we wrote a function that calculates the average length of lists in a list (e.g., characters in words, words in sentences, or sentences in a text). This happens very often when you write Haskell programs: lots of functions are generic and can be reused for other tasks.
+
 
     <sect1 xml:id="sec-words-tokenization">
         <title>A note on tokenization</title>
