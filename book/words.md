@@ -375,40 +375,21 @@ Prelude> averageLength [["I", "like", "Haskell", "."],
 Woo! That's the average sentence length, expressed in number of words. It turns out that, although we set out to make a function to calculate the average token length, we wrote a function that calculates the average length of lists in a list (e.g., characters in words, words in sentences, or sentences in a text). This happens very often when you write Haskell programs: lots of functions are generic and can be reused for other tasks.
 
 
-    <sect1 xml:id="sec-words-tokenization">
-        <title>A note on tokenization</title>
+# A note on tokenization
 
-        <para>When dealing with real-world text, it is usually not neatly split in sentences and
-            tokens. For example, consider this book - punctuation is usually glued to words. These
-            processes, sentence splitting and tokenization may seem trivial, unfortunately they are
-            not. Consider the following sentence: </para>
-        <para><emphasis role="italic">E.g. Jack doesn't have 19.99 to spend.</emphasis></para>
-        <para>
-            If we simply perform sentence splitting on periods
-            (<emphasis>.</emphasis>), we will find four sentences:
-        </para>
-        <orderedlist numeration="arabic">
-            <listitem>
-                <para>
-                    <emphasis>E.</emphasis>
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <emphasis>g.</emphasis>
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <emphasis>Jack doesn't have 19.</emphasis>
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    <emphasis>99 to spend.</emphasis>
-                </para>
-            </listitem>
-        </orderedlist>
+When dealing with real-world text, it is usually not neatly split in sentences and tokens. For example, consider this book - punctuation is usually glued to words. These processes, sentence splitting and tokenization may seem trivial, unfortunately they are not. Consider the following sentence:
+
+ *E.g. Jack doesn't have 19.99 to spend*.
+
+If we simply perform sentence splitting on periods (**.**), we will find four sentences:
+
+- *E.*
+- *g.*
+- *Jack doesn't have 19.*
+- *99 to spend.*
+
+
+
         <para>Of course, it is just one sentence. Similar problems arise during punctuation: how do
             we know that <emphasis>E.g.</emphasis> and <emphasis>19.99</emphasis> should not be
             split? And how about <emphasis>doesn't</emphasis>, which should probably be split as
