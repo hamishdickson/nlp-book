@@ -388,14 +388,8 @@ If we simply perform sentence splitting on periods (**.**), we will find four se
 - *Jack doesn't have 19.*
 - *99 to spend.*
 
+Of course, it is just one sentence. Similar problems arise during punctuation: how do we know that `E.g.` and `19.99` should not be split? And how about `doesn't`, which should probably be split as `does n't` or `does not`? Tokenization can be performed accurately, but it requires techniques that you will see in later chapters. So don't worry, we will get back to proper tokenization later on. We promise!
 
-
-        <para>Of course, it is just one sentence. Similar problems arise during punctuation: how do
-            we know that <emphasis>E.g.</emphasis> and <emphasis>19.99</emphasis> should not be
-            split? And how about <emphasis>doesn't</emphasis>, which should probably be split as
-                <emphasis>does n't</emphasis> or <emphasis>does not</emphasis>? Tokenization can be
-            performed accurately, but it requires techniques that you will see in later chapters. So
-            don't worry, we will get back to proper tokenization later on. We promise! </para>
         <para>Of course, up to the point where we handle tokenization, we need material to work on.
             To make life easier for you, the material for the first chapters of the book is
             pre-tokenized in a plain-text file using two simple rules: </para>
