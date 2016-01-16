@@ -390,81 +390,57 @@ If we simply perform sentence splitting on periods (**.**), we will find four se
 
 Of course, it is just one sentence. Similar problems arise during punctuation: how do we know that `E.g.` and `19.99` should not be split? And how about `doesn't`, which should probably be split as `does n't` or `does not`? Tokenization can be performed accurately, but it requires techniques that you will see in later chapters. So don't worry, we will get back to proper tokenization later on. We promise!
 
-        <para>Of course, up to the point where we handle tokenization, we need material to work on.
-            To make life easier for you, the material for the first chapters of the book is
-            pre-tokenized in a plain-text file using two simple rules: </para>
-        <orderedlist numeration="arabic">
-            <listitem>
-                <para>
-                    One sentence per line.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Tokens are separated by a space.
-                </para>
-            </listitem>
-        </orderedlist>
-        <para>To convert a text file to a Haskell representation, sentence splitting is a matter of
-            splitting by line, and tokenization a matter of splitting by space. Have a look at the
-            following example: </para>
-        <para>
-            <screen>Prelude> <userinput>"This is Jack .\nHe is a Haskeller ."</userinput>
-"This is Jack .\nHe is a Haskeller ."</screen>
-        </para>
-        <para>This is exactly the representation that we will be using for our textual data. As you
-            can see, the tokens are separated by spaces. Both sentences are separated using a
-            newline. When writing down a string literally, you can insert a newline using <emphasis
-                role="italic">\n</emphasis>. </para>
-        <para>Haskell provides a <function>lines</function> function to split up a string by line.
-            Not surprisingly, this function accepts a string as its first argument, and will return
-            a list of strings: </para>
-        <para>
-            <screen>Prelude> <userinput>:type lines</userinput>
+Of course, up to the point where we handle tokenization, we need material to work on. To make life easier for you, the material for the first chapters of the book is pre-tokenized in a plain-text file using two simple rules:
+
+- One sentence per line.
+- Tokens are separated by a space.
+
+To convert a text file to a Haskell representation, sentence splitting is a matter of splitting by line, and tokenization a matter of splitting by space. Have a look at the following example:
+
+```haskell
+Prelude> "This is Jack .\nHe is a Haskeller ."
+"This is Jack .\nHe is a Haskeller ."
+```
+
+This is exactly the representation that we will be using for our textual data. As you can see, the tokens are separated by spaces. Both sentences are separated using a newline. When writing down a string literally, you can insert a newline using *\n*.
+
+Haskell provides a `lines` function to split up a string by line. Not surprisingly, this function accepts a string as its first argument, and will return a list of strings:
+
+```haskell
+Prelude> :type lines
 lines :: String -> [String]
-Prelude> <userinput>lines "This is Jack .\nHe is a Haskeller ."</userinput>
-["This is Jack .","He is a Haskeller ."]</screen>
-        </para>
-        <para>That was easy! Now to the actual tokenization. For all sentences, we have a string
-            representing the sentence. We want to split this string on the space character. Haskell
-            also has a function to do this, named <function>words</function>.
-                <function>words</function> is nearly the same function as
-            <function>lines</function>, except that it splits on spaces rather than newlines: </para>
-        <para>
-            <screen>Prelude> <userinput>words "This is Jack ."</userinput>
-["This","is","Jack","."]</screen>
-        </para>
-        <para>That will do, but we have to apply this to every sentence in the list of sentences.
-            Recall that we can use the <function>map</function> function we have seen earlier to
-            apply the <function>words</function> function to each element of the list of
-            (untokenized) sentences: </para>
-        <para>
-            <screen>Prelude> <userinput>map words (lines "This is Jack .\nHe is a Haskeller .")</userinput>
-[["This","is","Jack","."],["He","is","a","Haskeller","."]]</screen>
-        </para>
-        <para>Allright! That will do the job. We know how to turn this into a full-fledged function: </para>
-        <para>
-            <screen>Prelude> <userinput>let splitTokenize text = map words (lines text)</userinput>
-Prelude> <userinput>splitTokenize "This is Jack .\nHe is a Haskeller ."</userinput>
-[["This","is","Jack","."],["He","is","a","Haskeller","."]]</screen>
-        </para>
-        <para>This is a good moment to beautify this function a bit. To make it simpler, we first
-            need to get rid of the parentheses. We used the parentheses to tell Haskell that it
-            should evaluate <emphasis>lines text</emphasis> first, because it would otherwise try to
-            map over the function <function>lines</function>, which would fail, because it is not a
-            list. Very often, you will encounter function applications of the form
-                <emphasis>f(g(x))</emphasis>, or <emphasis>f(g(h(x)))</emphasis>, etc. Haskell
-            provides the <emphasis>(.)</emphasis> function to combine such function applications.
-            So, <emphasis>f(g(x))</emphasis> can be rewritten to <emphasis>(f . g) x</emphasis>
-            (apply function <emphasis>f</emphasis> to the outcome of <emphasis>g(x)</emphasis>) and
-                <emphasis>f(g(h(x)))</emphasis> as <emphasis>(f . g . h) x</emphasis> (apply
-            function <emphasis>f</emphasis> to the outcome of a function <emphasis>g</emphasis>,
-            which is in turn applied to the outcome of <emphasis>h(x))</emphasis>. As you can see,
-            this so-called <emphasis role="italic">function composition</emphasis> makes things much
-            easier to read. We can now rewrite our tokenization function by using function
-            composition: </para>
-        <para>
-            <screen>Prelude> <userinput>let splitTokenize text = (map words . lines) text</userinput></screen>
+Prelude> lines "This is Jack .\nHe is a Haskeller ."
+["This is Jack .","He is a Haskeller ."]
+```
+
+That was easy! Now to the actual tokenization. For all sentences, we have a string representing the sentence. We want to split this string on the space character. Haskell also has a function to do this, named `words`. `words` is nearly the same function as `lines`, except that it splits on spaces rather than newlines:
+
+```haskell
+Prelude> words "This is Jack ."
+["This","is","Jack","."]
+```
+
+That will do, but we have to apply this to every sentence in the list of sentences. Recall that we can use the `map` function we have seen earlier to apply the `words` function to each element of the list of (untokenized) sentences:
+
+```haskell
+Prelude> map words (lines "This is Jack .\nHe is a Haskeller .")
+[["This","is","Jack","."],["He","is","a","Haskeller","."]]
+```
+
+Allright! That will do the job. We know how to turn this into a full-fledged function:
+
+```haskell
+Prelude> let splitTokenize text = map words (lines text)
+Prelude> splitTokenize "This is Jack .\nHe is a Haskeller ."
+[["This","is","Jack","."],["He","is","a","Haskeller","."]]
+```
+
+This is a good moment to beautify this function a bit. To make it simpler, we first need to get rid of the parentheses. We used the parentheses to tell Haskell that it should evaluate `lines text` first, because it would otherwise try to map over the function `lines`, which would fail, because it is not a list. Very often, you will encounter function applications of the form `f(g(x))`, or `f(g(h(x)))`, etc. Haskell provides the `(.)` function to combine such function applications. So, `f(g(x))` can be rewritten to `(f . g) x` (apply function `f` to the outcome of `g(x)`) and `f(g(h(x)))` as `(f . g . h) x` (apply function `f` to the outcome of a function `g`, which is in turn applied to the outcome of `h(x)`). As you can see, this so-called **function composition** makes things much easier to read. We can now rewrite our tokenization function by using function composition:
+
+```haskell
+Prelude> let splitTokenize text = (map words . lines) text
+```
+
         </para>
         <para>This states that we apply <emphasis>map words</emphasis> to the outcome
                 <emphasis>lines text</emphasis>. This may not yet seem so interesting. However, it
