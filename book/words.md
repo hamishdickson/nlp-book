@@ -441,48 +441,41 @@ This is a good moment to beautify this function a bit. To make it simpler, we fi
 Prelude> let splitTokenize text = (map words . lines) text
 ```
 
-        </para>
-        <para>This states that we apply <emphasis>map words</emphasis> to the outcome
-                <emphasis>lines text</emphasis>. This may not yet seem so interesting. However, it
-            allows us to make yet another simplification step. Consider the type of the
-                <function>map</function> function: </para>
-        <para>
-            <screen>Prelude> <userinput>:type map</userinput>
-map :: (a -> b) -> [a] -> [b]</screen>
-        </para>
-        <para><function>map</function> takes a function, and a list, and returns a list. Now we will
-            do something that may look weird, but is very common in functional programming. </para>
-        <para>
-            <screen>Prelude> <userinput>:type map words</userinput>
-map words :: [String] -> [[String]]</screen>
-        </para>
-        <para>Applying <function>map</function> to just one argument will give... another function!
-            In fact, what we just did is bind only the first argument of the map function, leaving
-            the second unbound. This gives a novel map function that only takes one argument, as it
-            has its first argument implicitly bound to the function words. This process is called
-                <emphasis>currying</emphasis> (indeed, named after the mathematician Haskell Curry)
-            in functional programming slang. </para>
-        <para>If we look back at our <function>splitTokenize</function> function, and look up the
-            type of <emphasis>map words . lines</emphasis>, we see that it is a function that takes
-            a <emphasis>String</emphasis> and returns a list of a list of strings: </para>
-        <para>
-            <screen>Prelude> <userinput>:type map words . lines</userinput>
-map words . lines :: String -> [[String]]</screen>
-        </para>
-        <para>In our function body, we apply this function to the argument
-            <emphasis>text</emphasis>. Of course, this is not really necessary, because
-                <emphasis>map words . lines</emphasis> already defines our function (as we have
-            shown above). We just need to bind this to the name <function>splitTokenize</function>.
-            Consequently the function can once more be simplified: </para>
-        <para>
-            <screen>Prelude> <userinput>let splitTokenize = map words . lines</userinput>
+This states that we apply `map words` to the outcome `lines text`. This may not yet seem so interesting. However, it allows us to make yet another simplification step. Consider the type of the `map` function:
+
+```haskell
+Prelude> :type map
+map :: (a -> b) -> [a] -> [b]
+```
+
+`map` takes a function, and a list, and returns a list. Now we will do something that may look weird, but is very common in functional programming.
+
+```haskell
+Prelude> :type map words
+map words :: [String] -> [[String]]
+```
+
+Applying `map` to just one argument will give... another function! In fact, what we just did is bind only the first argument of the map function, leaving the second unbound. This gives a novel map function that only takes one argument, as it has its first argument implicitly bound to the function words. This process is called `currying` (indeed, named after the mathematician Haskell Curry) in functional programming slang.
+
+If we look back at our `splitTokenize` function, and look up the type of *map words . lines*, we see that it is a function that takes a *String* and returns a list of a list of strings:
+
+```haskell            
+Prelude> :type map words . lines
+map words . lines :: String -> [[String]]
+```
+
+In our function body, we apply this function to the argument `text`. Of course, this is not really necessary, because `map words . lines` already defines our function (as we have shown above). We just need to bind this to the name `splitTokenize`. Consequently the function can once more be simplified:
+
+```haskell
+Prelude> let splitTokenize = map words . lines
 splitTokenize :: String -> [[String]]
-Prelude> <userinput>splitTokenize "This is Jack .\nHe is a Haskeller ."</userinput>
-[["This","is","Jack","."],["He","is","a","Haskeller","."]]</screen>
-        </para>
-    </sect1>
-    <sect1 xml:id="sec-words-lists">
-        <title>Word lists</title>
+Prelude> splitTokenize "This is Jack .\nHe is a Haskeller ."
+[["This","is","Jack","."],["He","is","a","Haskeller","."]]
+```
+
+
+## Word lists
+
         <para>In the following two sections, we will introduce two prototypical tasks related to
             words. The first is to make a word (or actually token) list, the second task is making a
             word frequency list.</para>
