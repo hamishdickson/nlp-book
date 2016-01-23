@@ -476,75 +476,52 @@ Prelude> splitTokenize "This is Jack .\nHe is a Haskeller ."
 
 ## Word lists
 
-        <para>In the following two sections, we will introduce two prototypical tasks related to
-            words. The first is to make a word (or actually token) list, the second task is making a
-            word frequency list.</para>
-        <para>A word list is a very simple data structure: it is just a list of
-                <emphasis>unique</emphasis> words or tokens that occur in a text. Our corpus is also
-            just a list of words, but since it contains duplicates, it is not a word list. The
-            obvious method to make a word list is to go through a corpus word by word, and adding
-            words that we have not yet seen to a second list. This requires some functions we
-            haven't seen yet: </para>
-        <itemizedlist>
-            <listitem>
-                <para>
-                    Adding an element to a list.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Checking whether an element is (or is not) in a list.
-                </para>
-            </listitem>
-            <listitem>
-                <para>
-                    Constructing a list while traversing another list.
-                </para>
-            </listitem>
-        </itemizedlist>
-        <para>We like easy things first, so let's start with the first item: adding an element to a
-            list. We have seen the <function>head</function> function before that chops of the head
-            of the list and returns it. But we can also do the reverse: take a list and give it a
-            new head. The old head then becomes the head of the tail (are you still following?). In
-            Haskell, we can do this using the <function>(:)</function> function:</para>
-        <para>
-            <screen>Prelude> <userinput>2 : [3,4,5]</userinput>
-[2,3,4,5] </screen>
-        </para>
-        <para>
-            Ain't that great? We can also add a head, and yet another:
-        </para>
-        <para>
-            <screen>Prelude> <userinput>1 : 2 : [3,4,5]</userinput>
-[1,2,3,4,5] </screen>
-        </para>
-        <para>
-            What if we do not have an element yet? Add the head to the empty
-            list (<emphasis>[]</emphasis>):
-        </para>
-        <para>
-            <screen>Prelude> <userinput>"Hi" : []</userinput>
-["Hi"] </screen>
-        </para>
-        <para>With that covered, the next thing we need to be able to do is checking whether some
-            element belongs to a list. We can do this using the <function>elem</function> function.
-            It takes an element as its first argument, and a list as its second. It will return a
-            Bool of the value <emphasis>True</emphasis> if the element was in the list, or
-                <emphasis>False</emphasis> otherwise. For example: </para>
-        <para>
-            <screen>Prelude> <userinput>elem 2 [1,2,3,4,5]</userinput>
+In the following two sections, we will introduce two prototypical tasks related to words. The first is to make a word (or actually token) list, the second task is making a word frequency list.
+
+A word list is a very simple data structure: it is just a list of *unique* words or tokens that occur in a text. Our corpus is also just a list of words, but since it contains duplicates, it is not a word list. The obvious method to make a word list is to go through a corpus word by word, and adding words that we have not yet seen to a second list. This requires some functions we haven't seen yet:
+
+- Adding an element to a list.
+- Checking whether an element is (or is not) in a list.
+- Constructing a list while traversing another list.
+
+We like easy things first, so let's start with the first item: adding an element to a list. We have seen the `head` function before that chops of the head of the list and returns it. But we can also do the reverse: take a list and give it a new head. The old head then becomes the head of the tail (are you still following?). In Haskell, we can do this using the `(:)` function:
+
+```haskell
+Prelude> 2 : [3,4,5]
+[2,3,4,5]
+```
+
+Ain't that great? We can also add a head, and yet another:
+
+```haskell
+Prelude> 1 : 2 : [3,4,5]
+[1,2,3,4,5]
+```
+
+What if we do not have an element yet? Add the head to the empty list (`[]`):
+
+```haskell
+Prelude> "Hi" : []
+["Hi"]
+```
+
+With that covered, the next thing we need to be able to do is checking whether some element belongs to a list. We can do this using the `elem` function. It takes an element as its first argument, and a list as its second. It will return a Bool of the value `True` if the element was in the list, or `False` otherwise. For example:
+
+```haskell
+Prelude> elem 2 [1,2,3,4,5]
 True
-Prelude> <userinput>elem 6 [1,2,3,4,5]</userinput>
-False </screen>
-        </para>
-        <para>The function <function>notElem</function> is exactly the inverse of
-                <function>elem</function>, and returns <emphasis>True</emphasis> if an element is
-            not in the list, and <emphasis>False</emphasis> otherwise: </para>
-        <para>
-            <screen>Prelude> <userinput>notElem "foo" ["foo","bar","baz"]</userinput>
+Prelude> elem 6 [1,2,3,4,5]
 False
-Prelude> <userinput>notElem "pony" ["foo","bar","baz"]</userinput>
-True</screen>
+```
+
+The function `notElem` is exactly the inverse of `elem`, and returns *True* if an element is not in the list, and *False* otherwise:
+
+```haskell
+Prelude> notElem "foo" ["foo","bar","baz"]
+False
+Prelude> notElem "pony" ["foo","bar","baz"]
+True
+```
         </para>
         <para>Ok, so we want to add an element to a list if, but only if, it is true that it is not
             yet a member of that list. Or in other words, the addition is conditional. Haskell
